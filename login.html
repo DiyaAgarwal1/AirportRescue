@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1" />
+   
+    <title>Port Rescue</title>
+    <link rel="stylesheet" href="./css/login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="full-page">
+        <div class="sub-page">
+            <div class="navigation-bar">
+                <div class="logo">
+                    <a href='photography.html'>Port Rescue</a>
+                </div>
+                <nav>
+                    <ul id='MenuItems'>
+                        <li><a href='./index.html'>Home</a></li>
+                        <li><a href='#'>Lost Items Complaint</a></li>
+                        <li><a href='#'>Found Items</a></li>
+                        <li><a href='./admin.html'>Admin</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="row">
+                <div class="col-1">
+                    <div class="form-box">
+                        <div class="form">
+                            <form class="login-form">
+                                <center><h1 class="main-heading"> UserLogin </h1></center>
+				                <input type="text" id="email" placeholder="Email"/>
+				                <input type="password" id="password" placeholder="password"/>
+				                <button id="signIn">LOGIN</button>
+				                <p class="message">Not Registered? <a href="#">Register</a></p>
+				            </form>
+                            <form class="register-form">
+                                <center><h1 class="main-heading"> User Register </h1></center>
+				                <input type="text" id="username" placeholder="user name"/>
+				                <input type="text" id="email1" placeholder="email-id"/>
+				                <input type="password" id="password1" placeholder="password"/>
+				                <button id="signUp">REGISTER</button>
+				                <p class="message">Already Registered?<a href="#">Login</a>
+				                </p>
+				            </form>
+			             </div>
+	                </div>
+                </div>
+                <div class="col-1">
+                    <p class='defination'> User Login and Registration</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>   
+    <script>
+        $('.message a').click(function(){$('form').animate({height: "toggle",opacity: "toggle"},"slow");});
+    </script>
+<!-- <script>
+    var x = document.getElementById("login");
+    var y = document.getElementById("register");
+    var z = document.getElementById("bts");
+
+ function register () {
+    x.style.left = "-400px";
+    y.style.left = "50px";
+    z.style.left = "110px";
+}
+
+function login () {
+    x.style.left = "50px";
+    y.style.left = "450px";
+    z.style.left = "0";
+} 
+
+</script> -->
+ <script type="module">
+    // Import the functions you need from the SDKs you need
+    
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js";
+    import { getDatabase,set,ref } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-database.js";
+           
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-analytics.js";
+      import { getAuth, signInWithEmailAndPassword,signOut,createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-auth.js";
+       
+      
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyC8iSc60XNYv4M5V_s4n3gbM61uAYrCpXs",
+    authDomain: "port-rescue-70d10.firebaseapp.com",
+    databaseURL: "https://port-rescue-70d10-default-rtdb.firebaseio.com",
+    projectId: "port-rescue-70d10",
+    storageBucket: "port-rescue-70d10.appspot.com",
+    messagingSenderId: "596330923712",
+    appId: "1:596330923712:web:b9d6ae26f1c4e128cc8f25",
+    measurementId: "G-Q1LC8S84FG"
+  };
+          
+// Initialize Firebase
+
+const app =initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const database=getDatabase(app);
+const auth = getAuth();
+
+
+signIn.addEventListener('click',(e)=>{
+e.preventDefault();
+var email=document.getElementById('email').value;
+var password=document.getElementById('password').value;
+
+
+signInWithEmailAndPassword(auth, email, password).catch((error) => {
+const errorCode = error.code;
+const errorMessage = error.message;
+alert(errorMessage)
+}).then((userCredential) => {
+// Signed in 
+
+const user = userCredential.user;
+if (user){
+alert('welcome you are logged in as user')
+
+
+}
+window.location.href="index.html"
+
+});
+
+})
+
+signUp.addEventListener('click',(e)=>{
+    e.preventDefault();
+  var email=document.getElementById('email1').value;
+  var password=document.getElementById('password1').value;
+  var username=document.getElementById('username').value;
+  createUserWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+  // Signed in 
+  const user = userCredential.user;
+
+set(ref(database,'users/'+username),{
+    username:username,
+    email:email
+  });
+  
+  alert("user created")
+  
+})
+.catch((error) => {
+  const errorCode = error.code;
+  const errorMessage = error.message;
+  alert(errorMessage)
+  // ..
+});
+
+ 
+  // ...
+
+})
+
+ </script>
+ 
+ 
+  
+
+
+
+</body>
+</html>

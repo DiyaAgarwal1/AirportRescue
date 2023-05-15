@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost Items</title>
+    <link rel="stylesheet" href="./css/lost.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <form class="form-group">
+            <div id="form">
+                <h1 class="text-white text-center">Lost Items</h1>
+
+                <div id="first-group">
+
+                    <div id="content">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        <input type="text" id="name" class="input-group" placeholder="First name">
+                    </div>
+
+                    <div id="content">
+                        <i class="fa fa-phone" aria-hidden="true"></i>
+                        <input type="number" id="number" class="input-group" placeholder="Phone number">
+                    </div>
+
+                    <div id="content">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        <input type="text" id="depdate" class="input-group" placeholder="Departure Date">
+                    </div>
+
+                    <div id="content">
+                        <i class="fa fa-archive" aria-hidden="true"></i>
+                        <input type="text" id="item" class="input-group" placeholder="What item is lost?">
+                    </div>
+
+                </div>
+
+                <div id="second-group">
+
+                    <div id="content">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        <input type="text" id="lastname" class="input-group" placeholder="Last name">
+                    </div>
+
+                    <div id="content">
+                        <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                        <input type="email" id="email" class="input-group" placeholder="Email">
+                    </div>
+
+                    <div id="content">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        <input type="text" id="arrdate" class="input-group" placeholder="Arrival Date">
+                    </div>
+
+                    <div id="content">
+                        <i class="fa fa-thumb-tack" aria-hidden="true"></i>
+                        <select class="input-group" id="track" style="background-color: black;">
+                            <option value="">Can you track the item?</option>
+                            <option value="yes">Yes, I can</option>
+                            <option value="no">No, I can't</option>
+                        </select>
+                    </div>
+            
+                </div>
+
+                <button id="submit" type="button"> Search Now </button>
+
+            </div>
+        </form>
+    </div>
+
+
+    <script type="module">
+		// Import the functions you need from the SDKs you need
+		   
+		// TODO: Add SDKs for Firebase products that you want to use
+		// https://firebase.google.com/docs/web/setup#available-libraries
+	  
+		// Your web app's Firebase configuration
+		// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+		import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+		import { getDatabase,set,ref } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
+		import { getAuth, createUserWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
+	   
+		import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-analytics.js";
+		// TODO: Add SDKs for Firebase products that you want to use
+		// https://firebase.google.com/docs/web/setup#available-libraries
+	  
+		// Your web app's Firebase configuration
+		// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+	
+	
+		// BACKEND CHANGES
+		
+		const firebaseConfig = {
+            apiKey: "AIzaSyC8iSc60XNYv4M5V_s4n3gbM61uAYrCpXs",
+    authDomain: "port-rescue-70d10.firebaseapp.com",
+    databaseURL: "https://port-rescue-70d10-default-rtdb.firebaseio.com",
+    projectId: "port-rescue-70d10",
+    storageBucket: "port-rescue-70d10.appspot.com",
+    messagingSenderId: "596330923712",
+    appId: "1:596330923712:web:b9d6ae26f1c4e128cc8f25",
+    measurementId: "G-Q1LC8S84FG"
+};
+		
+		 
+		
+		// Initialize Firebase
+		const app = initializeApp(firebaseConfig);
+		const analytics = getAnalytics(app);
+		
+	  
+		// Initialize Firebase
+		
+		
+	 const db=getDatabase();
+	   var name=document.getElementById('name');
+       var lastname=document.getElementById('lastname');
+       var item=document.getElementById('item');
+        var track=document.getElementById('track');
+	   var email=document.getElementById('email');
+	   var number=document.getElementById('number');
+	   var depdate=document.getElementById('depdate');
+	   var arrdate=document.getElementById('arrdate');
+	   var button=document.getElementById('submit');
+	   
+	
+	   function data(){
+		// console.log('button clicked')
+		set(ref(db,'Lost Items/'+item.value),{
+			
+			name:name.value,
+            lastname:lastname.value,
+            item:item.value,
+             track:track.value,
+            number:number.value,
+			email:email.value,
+            depdate:depdate.value,
+            arrdate:arrdate.value,   
+	
+		})
+        // console.log('data submitted to Firebase')
+	    .then(()=>{
+	        alert("Lost item details submitted successfully.")
+             window.location.href="index.html"
+	    })
+	  .catch(()=>{
+	    alert(error)
+	  })
+		  }
+        //   console.log(button) 
+	button.addEventListener('click',data)
+	  
+	  </script>
+
+</body>
+</html>
