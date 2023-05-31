@@ -22,7 +22,7 @@
                         <li><a href='#'>Lost Items Complaint</a></li>
                         <li><a href='#'>Found Items</a></li>
                         <li><a href='./login.html'>User</a></li>
-                        <li><a href='./staff.html'>Staff</a></li>
+                        <li><a href='./admin.html'>Admin</a></li>
                     </ul>
                 </nav>
             </div>
@@ -31,14 +31,14 @@
                     <div class="form-box">
                         <div class="form">
                             <form class="login-form">
-                                <h1 class="main-heading">Admin Login</h1>
+                                <h1 class="main-heading">Staff Login</h1>
 				                <input type="text" id="email" placeholder="Email"/>
 				                <input type="password" id="password" placeholder="password"/>
 				                <button id="signIn">LOGIN</button>
 				                <p class="message">Not Registered? <a href="#">Register</a></p>
 				            </form>
                             <form class="register-form">
-                                <h1 class="main-heading"> Register</h1>
+                                <h1 class="main-heading">Register</h1>
 				                <input type="text" id="username" placeholder="user name"/>
 				                <input type="text" id="email1" placeholder="email-id"/>
 				                <input type="password" id="password1" placeholder="password"/>
@@ -50,7 +50,7 @@
 	                </div>
                 </div>
                 <div class="col-1">
-                    <p class='defination'> Admin Login and Registration</p>
+                    <p class='defination'> Staff Login and Registration</p>
                 </div>
             </div>
         </div>
@@ -106,7 +106,7 @@ alert(errorMessage)
 
 const user = userCredential.user;
 if (user){
-alert('welcome you are logged in as admin')
+alert('welcome you are logged in as staff')
 
 
 }
@@ -126,12 +126,12 @@ signUp.addEventListener('click',(e)=>{
   // Signed in 
   const user = userCredential.user;
 
-set(ref(database,'Admins/'+username),{
+set(ref(database,'Staff/'+username),{
     username:username,
     email:email
   });
   
-  alert("Admin created")
+  alert("Staff created")
   
 })
 .catch((error) => {
