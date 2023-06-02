@@ -152,6 +152,22 @@
 	    alert(error)
 	  })
 		  }
+          function data1(){
+		
+		set(ref(db,'Found Items1/'+item.value),{
+			
+			name:name.value,
+            lastname:lastname.value,
+            item:item.value,
+            ownerdetails:ownerdetails.value,
+            number:number.value,
+			email:email.value,
+            depdate:depdate.value,
+            arrdate:arrdate.value
+			
+		   
+	
+		})}
 		 
 	button.addEventListener('click',data)
 	  
