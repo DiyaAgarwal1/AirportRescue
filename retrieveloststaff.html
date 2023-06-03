@@ -18,13 +18,13 @@
     <table class="table table-dark">
       <thead>
         <tr>
-          <th>Remarks</th>
           <th>Sno</th>
           <th>Name</th>
           <th>Item</th>
           <th>Can you track it</th>
           <th>Arrival date</th>
           <th>Mobile Number</th>
+          <th>Remarks</th>
           <th>Edit</th>
         </tr>
       </thead>
@@ -36,7 +36,7 @@
     var sno = 0;
     var tbody = document.getElementById('tbody1');
 
-    function AddItemToTable(remarks, name, item, track, arrdate, number, key) {
+    function AddItemToTable(name, item, track, arrdate, number,remarks, key) {
       let trow = document.createElement("tr");
       let tdRemarks = document.createElement("td");
       let tdSno = document.createElement("td");
@@ -47,22 +47,24 @@
       let tdNumber = document.createElement("td");
       let tdEditButton = document.createElement("td");
 
-      tdRemarks.innerHTML = remarks;
+     
       tdSno.innerHTML = ++sno;
       tdName.innerHTML = name;
       tdItem.innerHTML = item;
       tdTrack.innerHTML = track;
       tdArrDate.innerHTML = arrdate;
       tdNumber.innerHTML = number;
+      tdRemarks.innerHTML = remarks;
       tdEditButton.innerHTML = "<button class='btn btn-success edit-btn' data-key='" + key + "'>Edit</button>";
 
-      trow.appendChild(tdRemarks);
+      
       trow.appendChild(tdSno);
       trow.appendChild(tdName);
       trow.appendChild(tdItem);
       trow.appendChild(tdTrack);
       trow.appendChild(tdArrDate);
       trow.appendChild(tdNumber);
+      trow.appendChild(tdRemarks);
       trow.appendChild(tdEditButton);
       tbody.appendChild(trow);
     }
@@ -71,7 +73,7 @@
       sno = 0;
       tbody.innerHTML = "";
       TheCustomer.forEach(element => {
-        AddItemToTable(element.remarks, element.name, element.item, element.track, element.arrdate, element.number, element.key);
+        AddItemToTable( element.name, element.item, element.track, element.arrdate, element.number,element.remarks, element.key);
       });
     }
 
@@ -90,14 +92,14 @@
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-analytics.js";
 
     const firebaseConfig = {
-    apiKey: "AIzaSyC8iSc60XNYv4M5V_s4n3gbM61uAYrCpXs",
-    authDomain: "port-rescue-70d10.firebaseapp.com",
-    databaseURL: "https://port-rescue-70d10-default-rtdb.firebaseio.com",
-    projectId: "port-rescue-70d10",
-    storageBucket: "port-rescue-70d10.appspot.com",
-    messagingSenderId: "596330923712",
-    appId: "1:596330923712:web:b9d6ae26f1c4e128cc8f25",
-    measurementId: "G-Q1LC8S84FG"
+      apiKey: "AIzaSyCQDlgJMYHvaGiltYvx6_u1UENY1iuj7E0",
+    authDomain: "trouve-voyager.firebaseapp.com",
+    databaseURL: "https://trouve-voyager-default-rtdb.firebaseio.com",
+    projectId: "trouve-voyager",
+    storageBucket: "trouve-voyager.appspot.com",
+    messagingSenderId: "586354922091",
+    appId: "1:586354922091:web:d88f3310ddd12bb6fb172e",
+    measurementId: "G-D890CBVJPB"
     };
 
     const app = initializeApp(firebaseConfig);
@@ -138,7 +140,7 @@
     // Edit button click event listener
     document.addEventListener("click", (event) => {
         if (event.target.classList.contains("edit-btn")) {
-            const remarksCell = event.target.parentNode.parentNode.cells[0];
+            const remarksCell = event.target.parentNode.parentNode.cells[6];
             const remarksValue = remarksCell.innerHTML.trim();
             const newRemarks = prompt("Enter remarks", remarksValue);
             if (newRemarks !== null) {
@@ -149,16 +151,27 @@
         }
     });
 
+    // function UpdateRemarksInDatabase(key, newRemarks) {
+    //     const itemRef = ref(db, "Lost Items/" + key);
+    //     set(itemRef, { remarks: newRemarks })
+    //         .then(() => {
+    //             console.log("Remarks updated successfully.");
+    //         })
+    //         .catch((error) => {
+    //             console.error("Error updating remarks: ", error);
+    //         });
+    // }
     function UpdateRemarksInDatabase(key, newRemarks) {
-        const itemRef = ref(db, "Lost Items/" + key);
-        set(itemRef, { remarks: newRemarks })
-            .then(() => {
-                console.log("Remarks updated successfully.");
-            })
-            .catch((error) => {
-                console.error("Error updating remarks: ", error);
-            });
-    }
+  const itemRef = ref(db, "Lost Items/" + key);
+  update(itemRef, { remarks: newRemarks })
+    .then(() => {
+      console.log("Remarks updated successfully.");
+    })
+    .catch((error) => {
+      console.error("Error updating remarks: ", error);
+    });
+}
+
 </script>
 
 </body>
